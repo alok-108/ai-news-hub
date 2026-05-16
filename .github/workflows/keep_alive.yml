@@ -1,0 +1,23 @@
+name: "Keep Render API Alive"
+
+on:
+  schedule:
+    # Ping every 10 minutes to prevent Render free tier sleep
+    - cron: "*/10 * * * *"
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: 🏓 Ping Render API
+        run: |
+          echo "Pinging API at $(date -u)"
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.API_URL }}/ping")
+          echo "Response code: $RESPONSE"
+          if [ "$RESPONSE" = "200" ]; then
+            echo "✅ API is alive"
+          else
+            echo "⚠️  API returned $RESPONSE (may be waking up)"
+          fi
