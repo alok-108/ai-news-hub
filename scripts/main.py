@@ -20,9 +20,9 @@ import feedparser
 import requests
 
 try:
-    import google.generativeai as genai
+    from google import genai
 except ImportError:
-    print("❌ google-generativeai not installed. Run: pip install google-generativeai")
+    print("❌ google-genai not installed. Run: pip install google-genai")
     sys.exit(1)
 
 try:
@@ -78,9 +78,8 @@ def setup_gemini():
     if not GEMINI_API_KEY:
         print("❌ GEMINI_API_KEY not set.")
         sys.exit(1)
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    return model
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    return client
 
 
 # ────────────────────────── Title Tracking ──────────────────────────
@@ -184,7 +183,7 @@ Given the following raw news headline and snippet, write a comprehensive, SEO-fr
 """
 
 
-def generate_article(model, headline: dict, category: str) -> dict | None:
+def generate_article(client, headline: dict, category: str) -> dict | None:
     """Use Gemini to generate a multilingual article from a raw headline."""
     article_id = uuid.uuid4().hex[:8]
     prompt = GEMINI_PROMPT_TEMPLATE.format(
@@ -195,7 +194,10 @@ def generate_article(model, headline: dict, category: str) -> dict | None:
     )
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=prompt,
+        )
         raw_text = response.text.strip()
 
         # Clean up potential markdown fences
@@ -256,7 +258,7 @@ def run_pipeline():
     print(f"🚀 AI News Hub Pipeline — {datetime.now(timezone.utc).isoformat()}")
     print("=" * 60)
 
-    model = setup_gemini()
+    client = setup_gemini()
     posted_titles = load_posted_titles()
     new_articles = 0
     skipped = 0
@@ -275,7 +277,7 @@ def run_pipeline():
                 continue
 
             print(f"  📝 Generating article for: {raw_title[:60]}...")
-            article = generate_article(model, hl, category)
+            article = generate_article(client, hl, category)
 
             if article:
                 if post_article(article):
@@ -299,7 +301,7 @@ def run_pipeline():
                 continue
 
             print(f"  📝 Generating article for: {raw_title[:60]}...")
-            article = generate_article(model, hl, category)
+            article = generate_article(client, hl, category)
 
             if article:
                 if post_article(article):

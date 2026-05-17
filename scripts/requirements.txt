@@ -1,4 +1,4 @@
 feedparser>=6.0.11
-duckduckgo_search>=6.1.0
-google-generativeai>=0.7.0
+ddgs>=0.1.0
+google-genai>=0.3.0
 requests>=2.32.0
