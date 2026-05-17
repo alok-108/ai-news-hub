@@ -221,6 +221,12 @@ def generate_article(client, headline: dict, category: str) -> dict | None:
         return None
     except Exception as e:
         print(f"  ⚠️  Gemini error: {e}")
+        try:
+            print("  🔍 Available models for this API key:")
+            for m in client.models.list():
+                print(f"     - {m.name}")
+        except Exception as list_e:
+            print(f"     (Could not list models: {list_e})")
         return None
 
 
