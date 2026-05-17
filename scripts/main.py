@@ -78,7 +78,7 @@ def setup_gemini():
     if not GEMINI_API_KEY:
         print("❌ GEMINI_API_KEY not set.")
         sys.exit(1)
-    client = genai.Client(api_key=GEMINI_API_KEY)
+    client = genai.Client(api_key=GEMINI_API_KEY, http_options={'api_version': 'v1'})
     return client
 
 
