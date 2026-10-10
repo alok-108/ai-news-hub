@@ -1,9 +1,10 @@
 name: "Keep Render API Alive"
 
 on:
-  schedule:
-    # Ping every 10 minutes to prevent Render free tier sleep
-    - cron: "*/10 * * * *"
+  # Schedule disabled to preserve free GitHub Actions minutes
+  # schedule:
+  #   - cron: "*/10 * * * *"
+  workflow_dispatch:
 
 jobs:
   ping:

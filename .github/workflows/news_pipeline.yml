@@ -1,11 +1,11 @@
 name: "Auto News Pipeline"
 
 on:
-  schedule:
-    # Run every 4 hours
-    - cron: "0 */4 * * *"
+  # Schedule disabled to preserve free tier Gemini credits for other projects
+  # schedule:
+  #   - cron: "0 */4 * * *"
   workflow_dispatch:
-    # Allow manual triggers from GitHub UI
+    # Allow manual triggers from GitHub UI only when explicitly run
 
 jobs:
   generate-news:

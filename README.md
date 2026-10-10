@@ -1,14 +1,20 @@
 # 📰 AI News Hub — बहुभाषी समाचार
 
-> A fully automated, AI-powered, multilingual news blog built entirely on **free-tier services**. New articles appear dynamically every 4 hours — no rebuilds needed.
+> [!IMPORTANT]
+> **Automation Status: Paused / Deactivated**  
+> Is project ka background automation (GitHub Actions cron + Gemini API auto-generation) abhi intentionally band kar diya gaya hai, taaki free-tier Gemini API credits aur Actions execution limits dusre active project ([`gh-contrib-funnel`](https://github.com/alok-108/gh-contrib-funnel)) ke liye preserve aur utilize kiye ja sakein.  
+> *(Notice: Automation is currently disabled to reallocate free-tier AI credits to another active project).*
+
+> A multilingual news blog built on **free-tier services** (Hindi, English, Marathi).
 
 ![Tech Stack](https://img.shields.io/badge/React-18-61DAFB?logo=react)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?logo=fastapi)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas_M0-47A248?logo=mongodb)
 ![Gemini](https://img.shields.io/badge/Gemini_1.5_Flash-Free_Tier-4285F4?logo=google)
-![GitHub Actions](https://img.shields.io/badge/Automation-GitHub_Actions-2088FF?logo=githubactions)
+![Status](https://img.shields.io/badge/Automation-Paused-orange)
 
 ---
+
 
 ## ✨ Features
 
